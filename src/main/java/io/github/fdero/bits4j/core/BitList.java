@@ -78,17 +78,7 @@ public class BitList implements List<BitValue> {
 
     @Override
     public <T> T[] toArray(T[] alreadyExistingArray) {
-        ArrayList<BitValue> list = toArrayList();
-        if (alreadyExistingArray.length < list.size()) {
-            @SuppressWarnings("unchecked")
-            T[] result = (T[]) Arrays.copyOf(list.toArray(), list.size(), alreadyExistingArray.getClass());
-            return result;
-        }
-        System.arraycopy(list.toArray(), 0, alreadyExistingArray, 0, list.size());
-        if (alreadyExistingArray.length > list.size()) {
-            alreadyExistingArray[list.size()] = null;
-        }
-        return alreadyExistingArray;
+        return toArrayList().toArray(alreadyExistingArray);
     }
 
     @Override
