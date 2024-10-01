@@ -246,17 +246,17 @@ public class BitList implements List<BitValue> {
 
     @Override
     public Iterator<BitValue> iterator() {
-        throw new UnsupportedOperationException("Not Implemented Yet!");
+        return listIterator();
     }
 
     @Override
     public ListIterator<BitValue> listIterator() {
-        throw new UnsupportedOperationException("Not Implemented Yet!");
+        return new BitListIterator(this, -1);
     }
 
     @Override
     public ListIterator<BitValue> listIterator(int index) {
-        throw new UnsupportedOperationException("Not Implemented Yet!");
+        return new BitListIterator(this, index);
     }
 
     @Override
