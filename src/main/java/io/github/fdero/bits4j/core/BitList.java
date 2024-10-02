@@ -4,27 +4,23 @@ import java.util.*;
 
 public class BitList implements List<BitValue> {
 
-    private final BitSet bitSet;
-    private int size;
+    protected final BitField bitSet;
+    protected int size;
 
-    private BitList(BitSet bitSet, int size) {
+    protected BitList(BitField bitSet, int size) {
         this.bitSet = bitSet;
         this.size = size;
     }
 
     public BitList() {
-        this(new BitSet(), 0);
+        this(new BitField(), 0);
     }
 
     public BitValue get(int index) {
         if (index < 0  || index >= size) {
             throw new IndexOutOfBoundsException("Can't set a value at the specified index, it's out of bounds");
         }
-        if (bitSet.get(index)) {
-            return BitValue.ONE;
-        } else {
-            return BitValue.ZERO;
-        }
+        return bitSet.get(index);
     }
 
     @Override
@@ -40,10 +36,7 @@ public class BitList implements List<BitValue> {
             return null;
         }
         BitValue old = get(index);
-        switch (bitValue) {
-            case ONE -> bitSet.set(index);
-            case ZERO -> bitSet.clear(index);
-        }
+        bitSet.set(index, bitValue);
         return old;
     }
 
@@ -62,13 +55,17 @@ public class BitList implements List<BitValue> {
         return size == 0;
     }
 
-    private ArrayList<BitValue> toArrayList() {
+    protected ArrayList<BitValue> toArrayList(int fromIndex, int toIndex) {
         ArrayList<BitValue> arrayList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = fromIndex; i < toIndex; i++) {
             BitValue bitValue = get(i);
             arrayList.add(bitValue);
         }
         return arrayList;
+    }
+
+    protected ArrayList<BitValue> toArrayList() {
+        return toArrayList(0, size);
     }
 
     @Override
@@ -159,12 +156,12 @@ public class BitList implements List<BitValue> {
     }
 
     public void addZero() {
-        bitSet.clear(size);
+        bitSet.set(size, BitValue.ZERO);
         size++;
     }
 
     public void addOne() {
-        bitSet.set(size);
+        bitSet.set(size, BitValue.ONE);
         size++;
     }
 
