@@ -115,8 +115,7 @@ public class BitListTest {
         bitList.add(BitValue.ZERO);
         bitList.add(BitValue.ZERO);
         assertTrue(bitList.removeAll(bitValues));
-        assertEquals(1, bitList.size());
-        assertEquals(BitValue.ZERO, bitList.get(0));
+        assertEquals(0, bitList.size());
     }
 
     @Test
