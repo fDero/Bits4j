@@ -13,7 +13,7 @@ class BitOutputStreamTest {
     void testWriteOfZeroBits() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
-        bitOutputStream.tryFlush();
+        bitOutputStream.flush();
         assertEquals(0, outputStream.toByteArray().length);
     }
 
@@ -21,7 +21,7 @@ class BitOutputStreamTest {
     void testWriteOfZeroBitsWithRoundup() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
-        bitOutputStream.tryFlush();
+        bitOutputStream.flush();
         bitOutputStream.roundUp();
         assertEquals(0, outputStream.toByteArray().length);
     }
@@ -35,7 +35,7 @@ class BitOutputStreamTest {
         bitOutputStream.write(BitValue.ZERO);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.roundUp();
-        bitOutputStream.tryFlush();
+        bitOutputStream.flush();
         assertEquals(1, outputStream.toByteArray().length);
         assertEquals(1+2+8, outputStream.toByteArray()[0]);
     }
@@ -54,7 +54,7 @@ class BitOutputStreamTest {
         bitOutputStream.write(BitValue.ZERO);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.roundUp();
-        bitOutputStream.tryFlush();
+        bitOutputStream.flush();
         assertEquals(2, outputStream.toByteArray().length);
         assertEquals(1+2+8, outputStream.toByteArray()[0]);
         assertEquals(1, outputStream.toByteArray()[1]);
@@ -76,7 +76,7 @@ class BitOutputStreamTest {
             bitOutputStream.write(bitValue);
         }
         bitOutputStream.roundUp();
-        bitOutputStream.tryFlush();
+        bitOutputStream.flush();
         assertEquals(3, outputStream.toByteArray().length);
         for (int i = 0; i < inputBytes.length; i++) {
             assertEquals(inputBytes[i], outputStream.toByteArray()[i]);

@@ -12,17 +12,22 @@ public class BitOutputStream {
         this.outputStream = inputStream;
     }
 
-    public void tryFlush() throws IOException {
+    public void write(BitValue bitValue) throws IOException {
+        assert bitValue != null;
+        partialFlush();
+        buffer.add(bitValue);
+    }
+
+    private void partialFlush() throws IOException {
         if (buffer.size() == 8) {
             outputStream.write(BitListConversions.asByte(buffer));
             buffer = new BitList();
         }
     }
 
-    public void write(BitValue bitValue) throws IOException {
-        assert bitValue != null;
-        tryFlush();
-        buffer.add(bitValue);
+    public void flush() throws IOException {
+        partialFlush();
+        outputStream.flush();
     }
 
     public void roundUp() throws IOException {
