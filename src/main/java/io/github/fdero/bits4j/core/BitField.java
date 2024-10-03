@@ -1,5 +1,7 @@
 package io.github.fdero.bits4j.core;
 
+import java.util.BitSet;
+
 public class BitField {
 
     private final java.util.BitSet internalBitSetImplementation;
@@ -8,7 +10,7 @@ public class BitField {
         this.internalBitSetImplementation = internalBitSetImplementation;
     }
 
-    BitField() {
+    public BitField() {
         this(new java.util.BitSet());
     }
 
@@ -33,5 +35,9 @@ public class BitField {
 
     public void clear() {
         internalBitSetImplementation.clear();
+    }
+
+    protected BitSet getBitSet() {
+        return internalBitSetImplementation;
     }
 }

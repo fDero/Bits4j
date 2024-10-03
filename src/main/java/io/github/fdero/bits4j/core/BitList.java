@@ -4,11 +4,11 @@ import java.util.*;
 
 public class BitList extends AbstractList<BitValue> {
 
-    protected final BitField bitSet;
+    protected final BitField bitField;
     protected int size;
 
     protected BitList(BitField bitSet, int size) {
-        this.bitSet = bitSet;
+        this.bitField = bitSet;
         this.size = size;
     }
 
@@ -16,11 +16,15 @@ public class BitList extends AbstractList<BitValue> {
         this(new BitField(), 0);
     }
 
+    protected BitField getBitField() {
+        return bitField;
+    }
+
     public BitValue get(int index) {
         if (index < 0  || index >= size) {
             throw new IndexOutOfBoundsException("Can't set a value at the specified index, it's out of bounds");
         }
-        return bitSet.get(index);
+        return bitField.get(index);
     }
 
     @Override
@@ -32,7 +36,7 @@ public class BitList extends AbstractList<BitValue> {
             throw new IllegalArgumentException("Can't add a null BitValue to a BitList");
         }
         BitValue old = get(index);
-        bitSet.set(index, bitValue);
+        bitField.set(index, bitValue);
         return old;
     }
 
@@ -42,7 +46,7 @@ public class BitList extends AbstractList<BitValue> {
 
     @Override
     public void clear() {
-        bitSet.clear();
+        bitField.clear();
         this.size = 0;
     }
 
@@ -76,12 +80,12 @@ public class BitList extends AbstractList<BitValue> {
     }
 
     public void addZero() {
-        bitSet.set(size, BitValue.ZERO);
+        bitField.set(size, BitValue.ZERO);
         size++;
     }
 
     public void addOne() {
-        bitSet.set(size, BitValue.ONE);
+        bitField.set(size, BitValue.ONE);
         size++;
     }
 
