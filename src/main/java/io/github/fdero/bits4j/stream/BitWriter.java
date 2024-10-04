@@ -1,14 +1,18 @@
-package io.github.fdero.bits4j.core;
+package io.github.fdero.bits4j.stream;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class BitOutputStream {
+import io.github.fdero.bits4j.core.BitList;
+import io.github.fdero.bits4j.core.BitListConversions;
+import io.github.fdero.bits4j.core.BitValue;
+
+public class BitWriter {
 
     private final OutputStream outputStream;
     private BitList buffer = new BitList();
 
-    public BitOutputStream(OutputStream inputStream) {
+    public BitWriter(OutputStream inputStream) {
         this.outputStream = inputStream;
     }
 

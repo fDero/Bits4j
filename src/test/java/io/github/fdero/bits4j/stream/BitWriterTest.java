@@ -1,4 +1,4 @@
-package io.github.fdero.bits4j.core;
+package io.github.fdero.bits4j.stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,12 +7,16 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-class BitOutputStreamTest {
+import io.github.fdero.bits4j.core.BitList;
+import io.github.fdero.bits4j.core.BitListConversions;
+import io.github.fdero.bits4j.core.BitValue;
+
+class BitWriterTest {
 
     @Test
     void testWriteOfZeroBits() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
+        BitWriter bitOutputStream = new BitWriter(outputStream);
         bitOutputStream.flush();
         assertEquals(0, outputStream.toByteArray().length);
     }
@@ -20,7 +24,7 @@ class BitOutputStreamTest {
     @Test
     void testWriteOfZeroBitsWithRoundup() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
+        BitWriter bitOutputStream = new BitWriter(outputStream);
         bitOutputStream.flush();
         bitOutputStream.roundUp();
         assertEquals(0, outputStream.toByteArray().length);
@@ -29,7 +33,7 @@ class BitOutputStreamTest {
     @Test
     void testWriteOfFewBits() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
+        BitWriter bitOutputStream = new BitWriter(outputStream);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.write(BitValue.ZERO);
@@ -43,7 +47,7 @@ class BitOutputStreamTest {
     @Test
     void testWriteOfALittleMoreBits() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
+        BitWriter bitOutputStream = new BitWriter(outputStream);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.write(BitValue.ZERO);
@@ -63,7 +67,7 @@ class BitOutputStreamTest {
     @Test
     void testWriteOfManyBits() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        BitOutputStream bitOutputStream = new BitOutputStream(outputStream);
+        BitWriter bitOutputStream = new BitWriter(outputStream);
         BitList inputBuffer = new BitList();
         byte[] inputBytes = new byte[]{ (byte)17, (byte)16, (byte)15 };
         BitList firstByteAsBitList = BitListConversions.fromByte(inputBytes[0]);

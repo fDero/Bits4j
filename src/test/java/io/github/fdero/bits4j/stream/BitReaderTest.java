@@ -1,19 +1,23 @@
-package io.github.fdero.bits4j.core;
+package io.github.fdero.bits4j.stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import io.github.fdero.bits4j.core.BitList;
+import io.github.fdero.bits4j.core.BitListConversions;
+import io.github.fdero.bits4j.core.BitValue;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-class BitInputStreamTest {
+class BitReaderTest {
 
     @Test
     void testReadOfZeroBits() throws IOException {
         InputStream inputStream = new ByteArrayInputStream(new byte[]{});
-        BitInputStream bitInputStream = new BitInputStream(inputStream);
+        BitReader bitInputStream = new BitReader(inputStream);
         BitList outputBuffer = new BitList();
         BitValue extractedValue = null;
         while ((extractedValue = bitInputStream.read()) != null) {
@@ -26,7 +30,7 @@ class BitInputStreamTest {
     void testReadFewBits() throws IOException {
         byte inputByte = (byte) 'a';
         InputStream inputStream = new ByteArrayInputStream(new byte[]{inputByte});
-        BitInputStream bitInputStream = new BitInputStream(inputStream);
+        BitReader bitInputStream = new BitReader(inputStream);
         BitList outputBuffer = new BitList();
         BitValue extractedValue = null;
         while ((extractedValue = bitInputStream.read()) != null) {
@@ -40,7 +44,7 @@ class BitInputStreamTest {
     void testReadManyBits() throws IOException {
         byte[] inputBytes = new byte[]{ (byte)'a', (byte)'b', (byte)'c', (byte)'d' };
         InputStream inputStream = new ByteArrayInputStream(inputBytes);
-        BitInputStream bitInputStream = new BitInputStream(inputStream);
+        BitReader bitInputStream = new BitReader(inputStream);
         BitList outputBuffer = new BitList();
         int inputBytesCursor = 0;
         BitValue extractedValue = null;

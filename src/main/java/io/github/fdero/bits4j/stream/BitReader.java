@@ -1,15 +1,19 @@
-package io.github.fdero.bits4j.core;
+package io.github.fdero.bits4j.stream;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class BitInputStream {
+import io.github.fdero.bits4j.core.BitList;
+import io.github.fdero.bits4j.core.BitListConversions;
+import io.github.fdero.bits4j.core.BitValue;
+
+public class BitReader {
 
     private final InputStream inputStream;
     private BitList buffer = null;
     private int bufferIndex = 0;
 
-    public BitInputStream(InputStream inputStream) {
+    public BitReader(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
