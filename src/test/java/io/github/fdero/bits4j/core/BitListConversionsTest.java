@@ -1,6 +1,7 @@
 package io.github.fdero.bits4j.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,18 +32,18 @@ class BitListConversionsTest {
     }
 
     @Test
-    void stringConversionTest() {
+    void binaryStringConversionTest() {
         String byteValue = "1101";
-        BitList bitList = BitListConversions.fromString(byteValue);
+        BitList bitList = BitListConversions.fromBinaryString(byteValue);
         assertEquals(4, bitList.size());
-        assertEquals(byteValue, BitListConversions.asString(bitList));
+        assertEquals(byteValue, BitListConversions.asBinaryString(bitList));
     }
 
     @Test
-    void emptyStringConversionTest() {
+    void emptyBinaryStringConversionTest() {
         String byteValue = "";
-        BitList bitList = BitListConversions.fromString(byteValue);
-        assertEquals(0, bitList.size());
-        assertEquals(byteValue, BitListConversions.asString(bitList));
+        BitList bitList = BitListConversions.fromBinaryString(byteValue);
+        assertTrue(bitList.isEmpty());
+        assertEquals(byteValue, BitListConversions.asBinaryString(bitList));
     }
 }

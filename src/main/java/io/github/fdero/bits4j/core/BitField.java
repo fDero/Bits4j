@@ -2,7 +2,7 @@ package io.github.fdero.bits4j.core;
 
 import java.util.BitSet;
 
-public class BitField {
+class BitField {
 
     private final java.util.BitSet internalBitSetImplementation;
 
