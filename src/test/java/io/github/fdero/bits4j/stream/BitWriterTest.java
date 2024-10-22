@@ -22,11 +22,11 @@ class BitWriterTest {
     }
 
     @Test
-    void testWriteOfZeroBitsWithRoundup() throws IOException {
+    void testWriteOfZeroBitsWithaddPadding() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BitWriter bitOutputStream = new BitWriter(outputStream);
         bitOutputStream.flush();
-        bitOutputStream.roundUp();
+        bitOutputStream.addPadding();
         assertEquals(0, outputStream.toByteArray().length);
     }
 
@@ -38,7 +38,7 @@ class BitWriterTest {
         bitOutputStream.write(BitValue.ONE);
         bitOutputStream.write(BitValue.ZERO);
         bitOutputStream.write(BitValue.ONE);
-        bitOutputStream.roundUp();
+        bitOutputStream.addPadding();
         bitOutputStream.flush();
         assertEquals(1, outputStream.toByteArray().length);
         assertEquals(1+2+8, outputStream.toByteArray()[0]);
@@ -57,7 +57,7 @@ class BitWriterTest {
         bitOutputStream.write(BitValue.ZERO);
         bitOutputStream.write(BitValue.ZERO);
         bitOutputStream.write(BitValue.ONE);
-        bitOutputStream.roundUp();
+        bitOutputStream.addPadding();
         bitOutputStream.flush();
         assertEquals(2, outputStream.toByteArray().length);
         assertEquals(1+2+8, outputStream.toByteArray()[0]);
@@ -79,7 +79,7 @@ class BitWriterTest {
         for (BitValue bitValue : inputBuffer) {
             bitOutputStream.write(bitValue);
         }
-        bitOutputStream.roundUp();
+        bitOutputStream.addPadding();
         bitOutputStream.flush();
         assertEquals(3, outputStream.toByteArray().length);
         for (int i = 0; i < inputBytes.length; i++) {

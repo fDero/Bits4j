@@ -35,14 +35,14 @@ public class BitWriter {
      * 
      * <p> Writing doesn't happen immediately, instead it is buffered.
      *     Once eight bits are buffered, they are written to the underlying {@link java.io.OutputStream} as a byte. 
-     *     If eight bits are never reached, then nothing get written (you might want to call {@code roundUp} to 
+     *     If eight bits are never reached, then nothing get written (you might want to call {@code addPadding} to 
      *     add some trailing zeros) </p>
      * 
      * <p> If such underlying implementation it's also buffered itself, you might need to call the {@code flush} 
      *     method to see changes. </p>
      * 
      * @see #flush() 
-     * @see #roundUp()
+     * @see #addPadding()
      * 
      * @param bitValue the bit to write
      * @throws IOException if an I/O error occurs during the write operation to the underlying {@link OutputStream}
@@ -76,9 +76,9 @@ public class BitWriter {
      * <p> Internally calls {@code flush} on the underlying {@link OutputStream}. </p> 
      * 
      * <p> Keep in mind that bits are actually written in batches of 8 bits at a time, 
-     *     hence you might want to call {@code roundUp} to add some trailing zeros </p>
+     *     hence you might want to call {@code addPadding} to add some trailing zeros </p>
      * 
-     * @see #roundUp()
+     * @see #addPadding()
      * 
      * @throws IOException if an I/O error occurs during the flush operation to the underlying {@link OutputStream}
      */
@@ -95,7 +95,7 @@ public class BitWriter {
      * 
      * @see #flush()
      */
-    public void roundUp() {
+    public void addPadding() {
         if (!buffer.isEmpty()) {
             while (buffer.size() < 8) {
                 buffer.add(BitValue.ZERO);

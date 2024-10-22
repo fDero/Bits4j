@@ -12,6 +12,6 @@ compression/encryption algorithms.
 - The `BitReader` is a wrapper around `InputStream` that allows the user to read bit by bit.
 - The `BitWriter` is a wrapper around `OutputStream` that allows the user to write bit by bit.
 - The `flush` method of `BitWriter` ignores the last bits if they are not part of a byte.
-- The `BitWriter` has a `roundUp` method that adds zeros to complete the byte.
+- The `BitWriter` has a `addPadding` method that adds zeros to complete the byte.
 - The `BitListInputStream` it's an implementation of `InputStream` that reads from a `List<BitValue>`.
 - The `BitListOutputStream` it's an implementation of `OutputStream` that writes to `List<BitValue>`.
