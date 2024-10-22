@@ -8,7 +8,7 @@
 
     <groupId>io.github.fdero</groupId>
     <artifactId>bits4j</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A simple library for bits manipulation</description>
