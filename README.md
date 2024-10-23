@@ -1,9 +1,20 @@
 ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
-![version: pre-release](https://img.shields.io/badge/version-pre--release-red)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.fdero/bits4j.svg)](https://img.shields.io/maven-central/v/io.github.fdero/bits4j)
+[![javadoc](https://javadoc.io/badge2/io.github.fdero/bits4j/javadoc.svg)](https://javadoc.io/doc/io.github.fdero/bits4j)
 
 # Bits4j
 A simple user-friendly library to perform bits manipulations in java. You might find this useful if you're implementing
 compression/encryption algorithms. 
+
+### Include bits4j in your projects
+You can include the latest version of `bits4j` in your maven project adding the following dependency tag:
+```xml
+<dependency>
+    <groupId>io.github.fdero</groupId>
+    <artifactId>bits4j</artifactId>
+    <version>LATEST</version>
+</dependency>
+```
 
 ### Brief overview
 - This library comes with the `BitValue` enum, wich has two values, `BitValue.ZERO` and `BitValue.ONE`. 
