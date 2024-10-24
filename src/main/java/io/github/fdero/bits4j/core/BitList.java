@@ -14,21 +14,21 @@ public class BitList extends AbstractList<BitValue> {
     private int size;
 
     /**
+     * Constructs a new empty {@link BitList}.
+     */
+    public BitList() {
+        this(new BitField(), 0);
+    }
+
+    /**
      * Constructs a new {@link BitList} with the given {@link BitField} and size.
      * 
      * @param bitField the bit field that stores the bits
      * @param size the number of bits in the list
      */
-    protected BitList(BitField bitField, int size) {
+    BitList(BitField bitField, int size) {
         this.bitField = bitField;
         this.size = size;
-    }
-
-    /**
-     * Constructs a new empty {@link BitList}.
-     */
-    public BitList() {
-        this(new BitField(), 0);
     }
 
     /**
@@ -39,7 +39,7 @@ public class BitList extends AbstractList<BitValue> {
      * 
      * @return the underlying {@link BitField} that stores the bits
      */
-    protected BitField getBitField() {
+    BitField getBitField() {
         return bitField;
     }
 
