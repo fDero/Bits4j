@@ -114,7 +114,11 @@ public final class BitListConversions {
      */
     public static byte asByte(BitList bitList) {
         assert bitList.size() == 8;
-        return (byte) bitList.getBitField().getBitSet().toLongArray()[0];
+        long[] longArray = bitList.getBitField().getBitSet().toLongArray();
+        if (longArray.length == 0) {
+            return 0;
+        }
+        return (byte)longArray[0];
     }
 
     /**
@@ -132,7 +136,11 @@ public final class BitListConversions {
      */
     public static int asInt(BitList bitList) {
         assert bitList.size() == 32;
-        return (int) bitList.getBitField().getBitSet().toLongArray()[0];
+        long[] longArray = bitList.getBitField().getBitSet().toLongArray();
+        if (longArray.length == 0) {
+            return 0;
+        }
+        return (int)longArray[0];
     }
 
     /**
@@ -150,7 +158,11 @@ public final class BitListConversions {
      */
     public static long asLong(BitList bitList) {
         assert bitList.size() == 64;
-        return (long) bitList.getBitField().getBitSet().toLongArray()[0];
+        long[] longArray = bitList.getBitField().getBitSet().toLongArray();
+        if (longArray.length == 0) {
+            return 0;
+        }
+        return longArray[0];
     }
 
     /**

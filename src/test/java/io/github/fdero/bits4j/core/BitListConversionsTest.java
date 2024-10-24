@@ -16,6 +16,14 @@ class BitListConversionsTest {
     }
 
     @Test
+    void zeroByteConversionTest() {
+        byte byteValue = (byte) 0;
+        BitList bitList = BitListConversions.fromByte(byteValue);
+        assertEquals(8, bitList.size());
+        assertEquals(byteValue, BitListConversions.asByte(bitList));
+    }
+
+    @Test
     void integerConversionTest() {
         int integerValue = 4;
         BitList bitList = BitListConversions.fromInt(integerValue);
@@ -24,7 +32,23 @@ class BitListConversionsTest {
     }
 
     @Test
+    void zeroIntegerConversionTest() {
+        int integerValue = 0;
+        BitList bitList = BitListConversions.fromInt(integerValue);
+        assertEquals(32, bitList.size());
+        assertEquals(integerValue, BitListConversions.asInt(bitList));
+    }
+
+    @Test
     void longConversionTest() {
+        long byteValue = (byte) 'a';
+        BitList bitList = BitListConversions.fromLong(byteValue);
+        assertEquals(64, bitList.size());
+        assertEquals(byteValue, BitListConversions.asLong(bitList));
+    }
+
+    @Test
+    void zeroLongConversionTest() {
         long byteValue = (byte) 'a';
         BitList bitList = BitListConversions.fromLong(byteValue);
         assertEquals(64, bitList.size());
