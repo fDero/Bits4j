@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import io.github.fdero.bits4j.core.BitList;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import io.github.fdero.bits4j.core.BitListConversions;
@@ -35,6 +37,17 @@ public class BitListInputStreamTest {
         bitList.addAll(BitListConversions.fromByte((byte) 'b'));
         bitList.add(BitValue.ONE);
         bitList.add(BitValue.ZERO);
+        try (InputStream bitInputStream = new BitListInputStream(bitList)) {
+            assertEquals((byte) 'a', bitInputStream.read());
+            assertEquals((byte) 'b', bitInputStream.read());
+            assertEquals(-1, bitInputStream.read());
+        }
+    }
+
+    @Test
+    void testReadOfSomeBitsThatFormsExactBytes() throws IOException {
+        List<BitValue> bitList = BitListConversions.fromByte((byte) 'a');
+        bitList.addAll(BitListConversions.fromByte((byte) 'b'));
         try (InputStream bitInputStream = new BitListInputStream(bitList)) {
             assertEquals((byte) 'a', bitInputStream.read());
             assertEquals((byte) 'b', bitInputStream.read());

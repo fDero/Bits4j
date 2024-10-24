@@ -31,14 +31,14 @@ public class BitListInputStream extends InputStream {
     /**
      * Reads a byte from the list of bits.
      * 
-     * <p> Reads eight consecutive bits from the underlyng {@link List} of {@link BitValue} 
+     * <p> Reads eight consecutive bits from the underlying {@link List} of {@link BitValue}
      *     if possible. If there are no more such sequences (hence, even if there are still seven bits or less) the stream act as if the end is reached. </p>
      * 
      * @return the next byte read from the list of bits, or -1 if the end of the stream is reached
      */
     @Override
     public int read() {
-        if (byteCounter + 8 >= bitList.size()) {
+        if (byteCounter + 8 > bitList.size()) {
             return -1;
         }
         BitList byteBits = new BitList(); 
