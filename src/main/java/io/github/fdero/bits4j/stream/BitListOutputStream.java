@@ -35,7 +35,7 @@ public class BitListOutputStream extends OutputStream {
 
     /**
      * Writes an {@code int} encoded byte by adding them as sequences of 8 bits 
-     * to the underlyng {@link List} of {@link BitValue}
+     * to the underlying {@link List} of {@link BitValue}
      * 
      * <p> writing happens immediately, no buffers are used </p>
      */
