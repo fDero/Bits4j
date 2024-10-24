@@ -179,7 +179,92 @@ public class BitListTest {
     }
 
     @Test
-    void AddOneToEmptyBitListUsingAddAtIndex() {
+    void removeFromSingleElementBitList() {
+        BitList bitList = new BitList();
+        bitList.add(BitValue.ONE);
+        bitList.remove(0);
+        assertEquals(0, bitList.size());
+        assertTrue(bitList.isEmpty());
+    }
+
+    @Test
+    void removeMultipleElementsSequentially() {
+        BitList bitList = new BitList();
+        bitList.add(BitValue.ONE);
+        bitList.add(BitValue.ZERO);
+        bitList.add(BitValue.ONE);
+        bitList.add(BitValue.ZERO);
+
+        bitList.remove(0);
+        assertEquals(3, bitList.size());
+        bitList.remove(1);
+        assertEquals(2, bitList.size());
+        bitList.remove(1);
+        assertEquals(1, bitList.size());
+        assertEquals(BitValue.ZERO, bitList.get(0));
+    }
+
+    @Test
+    void throwsExceptionWhenRemovingNegativeIndex() {
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> new BitList().remove(-1)
+        );
+    }
+
+    @Test
+    void throwsExceptionWhenRemovingOutOfBounds() {
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> new BitList().remove(0)
+        );
+    }
+
+    @Test
+    void removeAllElementsOneByOne() {
+        BitList bitList = new BitList();
+        bitList.add(BitValue.ONE);
+        bitList.add(BitValue.ZERO);
+        bitList.add(BitValue.ONE);
+
+        int originalSize = bitList.size();
+        for (int i = 0; i < originalSize; i++) {
+            bitList.remove(0);
+            assertEquals(originalSize - (i + 1), bitList.size());
+        }
+        assertTrue(bitList.isEmpty());
+    }
+
+    @Test
+    void removeAndAddMixedOperations() {
+        BitList bitList = new BitList();
+        bitList.add(BitValue.ONE);
+        bitList.add(BitValue.ZERO);
+        bitList.remove(0);
+        bitList.add(BitValue.ONE);
+        bitList.remove(1);
+        assertEquals(1, bitList.size());
+        assertEquals(BitValue.ZERO, bitList.get(0));
+    }
+
+    @Test
+    void addToEmptyBitListUsingAddOne() {
+        BitList bitList = new BitList();
+        assertTrue(bitList.addOne());
+        assertEquals(1, bitList.size());
+        assertEquals(BitValue.ONE, bitList.get(0));
+    }
+
+    @Test
+    void addToEmptyBitListUsingAddZero() {
+        BitList bitList = new BitList();
+        assertTrue(bitList.addZero());
+        assertEquals(1, bitList.size());
+        assertEquals(BitValue.ZERO, bitList.get(0));
+    }
+
+    @Test
+    void addToEmptyBitListUsingAddAtIndex() {
         BitList bitList = new BitList();
         bitList.add(0, BitValue.ONE);
         assertEquals(1, bitList.size());
@@ -187,7 +272,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddOneToFrontOfFilledBitListUsingAddAtIndex() {
+    void addToFrontOfFilledBitListUsingAddAtIndex() {
         BitList bitList = new BitList();
         bitList.add(BitValue.ZERO);
         bitList.add(BitValue.ZERO);
@@ -198,7 +283,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddOneToMiddleOfFilledBitListUsingAddAtIndex() {
+    void addToMiddleOfFilledBitListUsingAddAtIndex() {
         BitList bitList = new BitList();
         bitList.add(BitValue.ZERO);
         bitList.add(BitValue.ZERO);
@@ -209,7 +294,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddOneToBackOfFilledBitListUsingAddAtIndex() {
+    void addToBackOfFilledBitListUsingAddAtIndex() {
         BitList bitList = new BitList();
         bitList.add(BitValue.ZERO);
         bitList.add(BitValue.ZERO);
@@ -220,7 +305,34 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToEmptyBitListUsingAddAtIndex() {
+    void addToActualEndOfFilledBitListUsingAddAtIndex() {
+        BitList bitList = new BitList();
+        bitList.add(BitValue.ZERO);
+        bitList.add(BitValue.ZERO);
+        bitList.add(BitValue.ZERO);
+        bitList.add(3, BitValue.ONE);
+        assertEquals(4, bitList.size());
+        assertEquals(BitValue.ONE, bitList.get(3));
+    }
+
+    @Test
+    void throwsExceptionForNegativeIndex() {
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> new BitList().add(-1, BitValue.ONE)
+        );
+    }
+
+    @Test
+    void throwsExceptionForTooLargeIndex() {
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> new BitList().add(1, BitValue.ONE)
+        );
+    }
+
+    @Test
+    void addAllToEmptyBitListUsingAddAtIndex() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ONE);
@@ -234,7 +346,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToFrontOfFilledBitListUsingAddAtIndex() {
+    void addAllToFrontOfFilledBitListUsingAddAtIndex() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ZERO);
@@ -254,7 +366,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToMiddleOfFilledBitListUsingAddAtIndex() {
+    void addAllToMiddleOfFilledBitListUsingAddAtIndex() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ZERO);
@@ -274,7 +386,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToBackOfFilledBitListUsingAddAtIndex() {
+    void addAllToBackOfFilledBitListUsingAddAtIndex() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ZERO);
@@ -294,7 +406,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToTailOfFilledBitListUsingAddAtIndex() {
+    void addAllToTailOfFilledBitListUsingAddAtIndex() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ZERO);
@@ -314,7 +426,7 @@ public class BitListTest {
     }
 
     @Test
-    void AddAllToTailOfFilledBitListUsingAddAll() {
+    void addAllToTailOfFilledBitListUsingAddAll() {
         List<BitValue> bitValues = new ArrayList<>();
         bitValues.add(BitValue.ONE);
         bitValues.add(BitValue.ZERO);

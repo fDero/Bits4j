@@ -215,7 +215,7 @@ public class BitList extends AbstractList<BitValue> {
      *         ({@code bitValue == null})
      * 
      * @throws IndexOutOfBoundsException if the index is out of range
-     *       ({@code index < 0 || index > size()})
+     *         ({@code index < 0 || index > size()})
      */
     @Override
     public void add(int index, BitValue bitValue) {
@@ -225,9 +225,8 @@ public class BitList extends AbstractList<BitValue> {
         add(bitValue);
         for (int i = size - 1; i > index; i--) {
             BitValue leftBitValue = get(i - 1);
-            BitValue rightBitValue = get(i);
-            set(i - 1, rightBitValue);
             set(i, leftBitValue);
         }
+        set(index, bitValue);
     }
 }
